@@ -11,6 +11,13 @@ class Aliases < Formula
 
   def install
     bin.install "aliases"
+    puts """
+    Binary added to path.
+
+    IMPORTANT: To automate the updating of your aliases, add the below to your profile (bashrc, bash_profile, profile):
+
+      aliases rehash
+    """
   end
 
   test do
