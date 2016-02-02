@@ -11,12 +11,15 @@ class Aliases < Formula
 
   def install
     bin.install "aliases"
+    system "aliases rehash"
     puts """
-    Binary added to path.
+    Binary successfully added to path.
 
-    IMPORTANT: To automate the updating of your aliases, add the below to your profile (bashrc, bash_profile, profile):
+    To finalize installation add aliases to your shell:
 
-      aliases rehash
+      echo 'eval \"$(aliases init -)\"' >> ~/.bash_profile
+
+    Replace `~/.bash_profile` with `~/.bashrc` for Debian/Ubuntu, `~/.zshrc` for Zsh or `~/.profile` for OSX
     """
   end
 
