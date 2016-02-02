@@ -7,17 +7,16 @@ class Aliases < Formula
   homepage "https://github.com/sebglazebrook/aliases"
   url "https://github.com/sebglazebrook/aliases/raw/master/releases/0.1.0/mac/aliases.tar.gz"
   version "0.1.0"
-  sha256 "e71441082ae2a121aa6a016ad5e5a766a22d3de9868c5f44ad45510226a94f7b"
+  sha256 "9db6e2a66709ffb01bc551e68015a2cbcec7f398a4399d4a6537abd0b9575271"
 
   def install
     bin.install "aliases"
-    system "aliases rehash"
     puts """
     Binary successfully added to path.
 
     To finalize installation add aliases to your shell:
 
-      echo 'eval \"$(aliases init -)\"' >> ~/.bash_profile
+      echo 'eval \"$(aliases init --global)\"' >> ~/.bash_profile
 
     Replace `~/.bash_profile` with `~/.bashrc` for Debian/Ubuntu, `~/.zshrc` for Zsh or `~/.profile` for OSX
     """
