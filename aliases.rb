@@ -15,10 +15,12 @@ class Aliases < Formula
   end
 
   def initialize_shell
-    shell_profile = [".bash_profile", ".profile"].first { |filename| File.exists?("#{ENV["HOME"]}/#{filename}") }
+    username = `whoami`.strip
+    user_home = "/Users/#{username}"
+    shell_profile = [".bash_profile", ".profile"].first { |filename| File.exists?("#{user_home}/#{filename}") }
     if shell_profile
-      unless File.readlines("#{ENV["HOME"]}/#{shell_profile}").grep('eval "$(aliases init --global)').size > 0
-        `echo 'eval \"$(aliases init --global)\"' >> #{ENV["HOME"]}/#{shell_profile}`
+      if File.readlines("#{user_home}/#{shell_profile}").grep(/eval "\$\(aliases init --global\)/).empty?
+        `printf '\n# Added during installation of 'aliases'\neval \"$(aliases init --global)\"\n' >> #{user_home}/#{shell_profile}`
       end
     else
       puts "Binary added to path but could not find shell profile to initialize aliases upon shell initialization."
