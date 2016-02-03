@@ -14,25 +14,6 @@ class Aliases < Formula
     initialize_shell
   end
 
-  def initialize_shell
-    username = `whoami`.strip
-    user_home = "/Users/#{username}"
-    shell_profile = [".bash_profile", ".profile"].first { |filename| File.exists?("#{user_home}/#{filename}") }
-    if shell_profile
-      if File.readlines("#{user_home}/#{shell_profile}").grep(/eval "\$\(aliases init --global\)/).empty?
-        `printf '\n# Added during installation of 'aliases'\neval \"$(aliases init --global)\"\n' >> #{user_home}/#{shell_profile}`
-      end
-    else
-      puts "Binary added to path but could not find shell profile to initialize aliases upon shell initialization."
-      puts """
-      You need to add the following to your shell profile:
-
-          echo 'eval \"$(aliases init --global)\"' >> ~/.bash_profile
-
-      """
-    end
-  end
-
   test do
     # `test do` will create, run in and delete a temporary directory.
     #
@@ -45,4 +26,37 @@ class Aliases < Formula
     # executables being tested: `system "#{bin}/program", "do", "something"`.
     system "false"
   end
+
+  private
+
+  def initialize_shell
+    if shell_profile_path
+      unless shell_already_initialized?
+        `printf '\n# Added during installation of 'aliases'\neval \"$(aliases init --global)\"\n' >> #{shell_profile_path}`
+      end
+    else
+      puts "Binary added to path but could not find shell profile to initialize aliases upon shell initialization."
+      puts """
+      You need to add the following to your shell profile:
+
+          echo 'eval \"$(aliases init --global)\"' >> ~/.bash_profile
+
+      """
+    end
+  end
+
+  def shell_profile_path
+    return @shell_profile_path if @shell_profile_path
+    shell_filename = [".bash_profile", ".profile"].first { |filename| File.exists?("#{user_home}/#{filename}") }
+    @shell_profile_path = "#{user_home}/#{shell_filename}" if shell_filename
+  end
+
+  def user_home
+    @user_home ||= "/Users/#{`whoami`.strip}"
+  end
+
+  def shell_already_initialized?
+    !File.readlines(shell_profile_path).grep(/eval "\$\(aliases init --global\)/).empty?
+  end
+
 end
