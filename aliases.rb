@@ -14,12 +14,12 @@ class Aliases < Formula
     puts """
     Binary successfully added to path.
 
-    To finalize installation add aliases to your shell:
+    To finalize installation add aliases to your shell, replacing `~/.bash_profile` with `~/.bashrc` for Debian/Ubuntu, `~/.zshrc` for Zsh or `~/.profile` for OSX
 
       echo 'eval \"$(aliases init --global)\"' >> ~/.bash_profile
 
-    Replace `~/.bash_profile` with `~/.bashrc` for Debian/Ubuntu, `~/.zshrc` for Zsh or `~/.profile` for OSX
     """
+    # move the replace above the command or automate this
   end
 
   test do
