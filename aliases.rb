@@ -11,15 +11,24 @@ class Aliases < Formula
 
   def install
     bin.install "aliases"
-    puts """
-    Binary successfully added to path.
+    initialize_shell
+  end
 
-    To finalize installation add aliases to your shell, replacing `~/.bash_profile` with `~/.bashrc` for Debian/Ubuntu, `~/.zshrc` for Zsh or `~/.profile` for OSX
+  def initialize_shell
+    shell_profile = [".bash_profile", ".profile"].first { |filename| File.exists?("#{ENV["HOME"]}/#{filename}") }
+    if shell_profile
+      unless File.readlines("#{ENV["HOME"]}/#{shell_profile}").grep('eval "$(aliases init --global)').size > 0
+        `echo 'eval \"$(aliases init --global)\"' >> #{ENV["HOME"]}/#{shell_profile}`
+      end
+    else
+      puts "Binary added to path but could not find shell profile to initialize aliases upon shell initialization."
+      puts """
+      You need to add the following to your shell profile:
 
-      echo 'eval \"$(aliases init --global)\"' >> ~/.bash_profile
+          echo 'eval \"$(aliases init --global)\"' >> ~/.bash_profile
 
-    """
-    # move the replace above the command or automate this
+      """
+    end
   end
 
   test do
