@@ -5,9 +5,9 @@
 class Aliases < Formula
   desc "Bash aliases on steroids"
   homepage "https://github.com/sebglazebrook/aliases"
-  url "https://github.com/sebglazebrook/aliases/raw/master/releases/0.5.1/mac/aliases.tar.gz"
-  version "0.5.1"
-  sha256 "216cae93d871b3a8327a45eafd76253eb8882790348870694691f25141c61428"
+  url "https://github.com/sebglazebrook/aliases/raw/master/releases/0.6.0/mac/aliases.tar.gz"
+  version "0.6.0"
+  sha256 "14ea403e5f63c8f649e644296784b9e6ec23228447e860c1fae0299adcd43644"
 
   def install
     bin.install "aliases"
