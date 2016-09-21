@@ -2,23 +2,15 @@
 #                http://www.rubydoc.info/github/Homebrew/homebrew/master/Formula
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
 
-class Aliases < Formula
-  desc "Bash aliases on steroids"
-  homepage "https://github.com/sebglazebrook/aliases"
-  url "https://github.com/sebglazebrook/aliases/raw/master/releases/0.7.7/mac/aliases.tar.gz"
-  version "0.7.7"
-  sha256 "6f9d7cf41b1439a01f4e2dcf4731d2f3544930b99155f0a5d0f95d3cb44e2e95"
+class Walk < Formula
+  desc "Walk a directory and return what you find"
+  homepage "https://github.com/sebglazebrook/walk"
+  url "https://github.com/sebglazebrook/walk/raw/master/releases/0.1.0/mac/walk.tar.gz"
+  version "0.1.0"
+  sha256 "0f2eca07fd4b865eff3ee4f3e570745444b61d0ac72a78e33160ddaf7b648866"
 
   def install
-    bin.install "aliases"
-  end
-
-  def caveats; <<-EOS.undent
-    To activate the alias shims add the following to your profile:
-
-      echo 'eval \"$(aliases init --global)\"' >> ~/.bash_profile
-
-    EOS
+    bin.install "walk"
   end
 
   test do
