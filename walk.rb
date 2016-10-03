@@ -5,9 +5,9 @@
 class Walk < Formula
   desc "Walk a directory and return what you find"
   homepage "https://github.com/sebglazebrook/walk"
-  url "https://github.com/sebglazebrook/walk/raw/master/releases/0.1.0/mac/walk.tar.gz"
-  version "0.1.0"
-  sha256 "0f2eca07fd4b865eff3ee4f3e570745444b61d0ac72a78e33160ddaf7b648866"
+  url "https://github.com/sebglazebrook/walk/raw/master/releases/0.1.1/mac/walk.tar.gz"
+  version "0.1.1"
+  sha256 "4f0702ce9e9d628e4a595dcf6ef3b0eee507f2931cac0488f1d79aaca6cbb6d0"
 
   def install
     bin.install "walk"
